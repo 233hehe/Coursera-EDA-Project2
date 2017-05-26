@@ -1,0 +1,12 @@
+library(tidyverse)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+str(NEI)
+str(SCC)
+NEI <- as_tibble(NEI)
+SCC <- as_tibble(SCC)
+SCC$SCC <- parse_character(SCC$SCC)
+SCC$Short.Name <- parse_character(SCC$Short.Name)
+SCC$EI.Sector <- parse_character(SCC$EI.Sector)
+
+NEISCC<-merge(NEI,SCC,by="SCC")
